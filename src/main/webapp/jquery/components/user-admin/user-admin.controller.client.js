@@ -3,27 +3,77 @@
 (function () {
     jQuery(main);
 
+    var tbody;
+    var template;
+    var userService = new UserServiceClient();
+
     function main() {
-        var h1 = jQuery('#title');
-        h1.css('color', 'red');
-        h1.html('User Administration!');
+        tbody = $('tbody');
+        template = $('.template');
 
-        var red = $('.red');
-        red.css('color', 'white').css('background-color', 'red');
+        $('#createUser').click(createUser);
 
-        var tr = $('.template');
-        var tbody = $('tbody');
-        var users = [{username: 'bob'}, {username: 'charlie'}];
+        findAllUsers();
+    }
+
+    function findAllUsers() {
+        var promise = fetch('http://localhost:8080/api/user');
+        promise.then(function (response) {
+            return response.json();
+        }).then(renderUsers);
+    }
+
+    function createUser() {
+        console.log('createUser');
+        var username = $('#usernameFld').val();
+        var password = $('#passwordFld').val();
+        var firstName = $('#firstNameFld').val();
+        var lastName = $('#lastnameFld').val();
+
+        var user = {
+            username: username,
+            password: password,
+            firstName: firstName,
+            lastName: lastName
+        };
+
+        userService
+            .createUser(user)
+            .then(findAllUsers);
+    }
+
+    function renderUsers(users) {
+        tbody.empty();
 
         for (var i = 0; i < users.length; i++) {
             var user = users[i];
-            console.log(user);
-            var clone = tr.clone();
+            var clone = template.clone();
+
+            clone.attr('id', user.id);
+
+            clone.find('.delete').click(deleteUser);
+            clone.find('.edit').click(editUser);
+
             clone.find('.username').html(user.username);
             tbody.append(clone);
         }
     }
+
+    function deleteUser(event) {
+        console.log('deleteUser');
+        console.log(event);
+        var deleteBtn = $(event.currentTarget);
+        var userId = deleteBtn.parent().parent().attr('id');
+        userService.deleteUser(userId)
+            .then(findAllUsers);
+    }
+
+    function editUser(event) {
+        console.log(event);
+    }
+
 })();
+
 
 
 
