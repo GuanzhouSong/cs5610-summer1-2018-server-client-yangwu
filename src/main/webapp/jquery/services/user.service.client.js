@@ -5,19 +5,84 @@ function UserServiceClient() {
     this.deleteUser = deleteUser;
     this.findUserById = findUserById;
     this.updateUser = updateUser;
+    this.updateProfile = updateProfile;
+    this.popularProfile = popularProfile;
     this.login = login;
+    this.logout = logout;
+    this.register = register;
+
     this.url =
         'http://localhost:8080/api/user';
     this.login_url =
         'http://localhost:8080/api/login';
+    this.register_url =
+        'http://localhost:8080/api/register';
+    this.profile_url =
+        'http://localhost:8080/api/profile';
     var self = this;
 
-    function login(username, password) {
-        return fetch(self.login_url, {
+    function register(user) {
+        // fixme
+        return fetch(self.register_url, {
             method: 'post',
-            body: JSON.stringify({username: username, password: password}),
+            body: JSON.stringify(user),
             headers: {
                 'content-type': 'application/json'
+            }
+        }).then(function(response) {
+            if (response.status === 409) {
+                return null;
+            } else {
+                return response.json();
+            }
+        });
+    }
+
+    function login(user) {
+        return fetch(self.login_url, {
+            method: 'post',
+            body: JSON.stringify(user),
+            headers: {
+                'content-type': 'application/json'
+            }
+        }).then(function(response) {
+            if (response.status === 409) {
+                return null;
+            } else {
+                return response.json();
+            }
+        });
+    }
+
+    function logout() {
+        return fetch(self.profile_url, {
+            method: 'post'
+        })
+    }
+
+    function updateProfile(user) {
+        return fetch(self.profile_url, {
+            method: 'put',
+            body: JSON.stringify(user),
+            headers: {
+                'content-type': 'application/json'
+            }
+        }).then(function(response) {
+            if (response.status == 409) {
+                return null;
+            } else {
+                return response.json();
+            }
+        });
+    }
+
+    function popularProfile() {
+        return fetch(self.profile_url)
+            .then(function(response) {
+            if (response.status === 409) {
+                return null;
+            } else {
+                return response.json();
             }
         });
     }
@@ -30,10 +95,10 @@ function UserServiceClient() {
                 'content-type' : 'application/json'
             }
         }).then(function(response) {
-            if (response.bodyUsed) {
-                return response.json();
-            } else {
+            if (response.status === 409) {
                 return null;
+            } else {
+                return response.json();
             }
         });
     }
@@ -56,8 +121,8 @@ function UserServiceClient() {
             .then(function (response) {
                 return response.json();
             });
-
     }
+
     function createUser(user) {
         return fetch(self.url, {
             method: 'post',
