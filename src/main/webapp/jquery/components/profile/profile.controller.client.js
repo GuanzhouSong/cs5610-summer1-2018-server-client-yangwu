@@ -27,27 +27,18 @@
     function popularProfile(temp) {
         if (temp != null) {
             $('#username').val(temp.username);
-        }
-        if (temp != null) {
             $('#phone').val(temp.phone);
-        }
-        if (temp != null) {
             $('#email').val(temp.email);
-        }
-        if (temp != null) {
             $('#role').val(temp.role);
-        }
-        if (temp != null) {
             var date = parseISOString(temp.dateOfBirth);
             $('#dateOfBirth').val(date);
         }
     }
-    
+
     function parseISOString(s) {
         var index = s.indexOf("T");
         return s.substring(0, index);
     }
-
 
     function updateProfile() {
         var date = new Date($dateOfBirth.val()).toISOString();

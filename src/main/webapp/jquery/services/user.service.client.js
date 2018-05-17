@@ -22,7 +22,6 @@ function UserServiceClient() {
     var self = this;
 
     function register(user) {
-        // fixme
         return fetch(self.register_url, {
             method: 'post',
             body: JSON.stringify(user),

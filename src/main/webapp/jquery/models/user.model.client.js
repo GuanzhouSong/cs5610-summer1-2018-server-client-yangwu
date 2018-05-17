@@ -2,13 +2,11 @@
 function User(username, password, firstName, lastName) {
     this.username = username;
     this.password = password;
-    // ...same for rest of properties...
     this.firstName = firstName;
     this.lastName = lastName;
 
     this.setUsername = setUsername;
     this.getUsername = getUsername;
-    // ...same for rest of properties...
     this.setPassword = setPassword;
     this.getPassword = getPassword;
     this.setFirstName = setFirstName;
@@ -23,7 +21,6 @@ function User(username, password, firstName, lastName) {
     function getUsername() {
         return this.username;
     }
-    // ... same for rest of properties...
 
     function setPassword(password) {
         this.password = password;
