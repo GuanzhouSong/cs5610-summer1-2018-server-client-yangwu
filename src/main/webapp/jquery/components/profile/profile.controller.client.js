@@ -1,6 +1,8 @@
 (function() {
     $(init);
     var $username;
+    var $firstname;
+    var $lastname;
     var $phone;
     var $email;
     var $role;
@@ -11,9 +13,11 @@
     var userService = new UserServiceClient();
 
     function init() {
-        userService.popularProfile()
-            .then(popularProfile);
+        userService.populateProfile()
+            .then(populateProfile);
         $username = $("#username");
+        $firstname = $("#firstname");
+        $lastname = $("#lastname");
         $phone = $("#phone");
         $email = $("#email");
         $role = $("#role");
@@ -24,9 +28,11 @@
             .click(logout);
     }
 
-    function popularProfile(temp) {
+    function populateProfile(temp) {
         if (temp != null) {
             $('#username').val(temp.username);
+            $('#firstname').val(temp.firstName);
+            $('#lastname').val(temp.lastName);
             $('#phone').val(temp.phone);
             $('#email').val(temp.email);
             $('#role').val(temp.role);

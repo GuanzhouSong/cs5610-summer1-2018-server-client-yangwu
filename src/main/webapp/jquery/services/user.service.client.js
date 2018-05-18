@@ -6,7 +6,7 @@ function UserServiceClient() {
     this.findUserById = findUserById;
     this.updateUser = updateUser;
     this.updateProfile = updateProfile;
-    this.popularProfile = popularProfile;
+    this.populateProfile = populateProfile;
     this.login = login;
     this.logout = logout;
     this.register = register;
@@ -75,7 +75,7 @@ function UserServiceClient() {
         });
     }
 
-    function popularProfile() {
+    function populateProfile() {
         return fetch(self.profile_url)
             .then(function(response) {
             if (response.status === 409) {
