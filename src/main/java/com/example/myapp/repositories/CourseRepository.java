@@ -1,5 +1,6 @@
 package com.example.myapp.repositories;
 
-public class CourseRepository {
+import org.springframework.data.repository.CrudRepository;
+import com.example.myapp.models.Course;
 
-}
+public interface CourseRepository extends CrudRepository<Course, Integer> { }
