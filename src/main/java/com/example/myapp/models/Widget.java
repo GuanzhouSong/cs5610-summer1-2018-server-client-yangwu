@@ -17,6 +17,7 @@ public class Widget {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	private String title;
+	private int size;
 	private int parentId;
 	private String text;
 	private String widgetType;
@@ -30,6 +31,15 @@ public class Widget {
 	public void setId(int id) {
 		this.id = id;
 	}
+	
+	public int getSize() {
+		return size;
+	}
+	
+	public void setSize(int size) {
+		this.size = size;
+	}
+	
 	public String getTitle() {
 		return title;
 	}
@@ -64,5 +74,7 @@ public class Widget {
 	public void setWidgetType(String widgetType) {
 		this.widgetType = widgetType;
 	}
+	
+	
 
 }
