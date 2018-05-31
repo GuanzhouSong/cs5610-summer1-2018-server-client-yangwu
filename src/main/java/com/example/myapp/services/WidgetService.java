@@ -50,23 +50,7 @@ public class WidgetService {
 		return null;
 	}
 	
-//	@PostMapping("/api/lesson/{lessonId}/widget/save")
-//	public void saveAllWidgets(@PathVariable("lessonId") int lessonId, @RequestBody Widget widget) {
-//		
-////		widgetRepository.deleteAll();
-////		System.out.println(widgets);
-//		
-////			System.out.println(widget.getTitle());
-////			System.out.println(widget.getLesson());
-//			Optional<Lesson> data = lessonRepository.findById(lessonId);
-//			
-//			if (data.isPresent()) {
-//				Lesson lesson = data.get();
-//				widget.setLesson(lesson);
-//			}
-//			
-//			widgetRepository.save(widget);
-//		}
+
 	
 	@PostMapping("/api/widget/save")
 	public void saveAllWidgets(@RequestBody List<Widget> widgets) {
@@ -79,27 +63,7 @@ public class WidgetService {
 		}
 	
 	
-	
-//	@PostMapping("/api/widget/save")
-//	public void saveAllWidgets(@RequestBody List<Widget> widgets) {
-//		widgetRepository.deleteAll();
-////		System.out.println(widgets);
-//		for (Widget widget : widgets) {
-////			System.out.println(widget.getTitle());
-////			System.out.println(widget.getLesson());
-//			int lessonId = widget.getParentId();
-//			Optional<Lesson> data = lessonRepository.findById(lessonId);
-//			
-//			if (data.isPresent()) {
-//				Lesson lesson = data.get();
-//				widget.setLesson(lesson);
-//			}
-//			
-//			widgetRepository.save(widget);
-//		}
-//	}
-	
-//	
+
 	@DeleteMapping("/api/widget/{widgetId}")
 	public void deleteWidget(@PathVariable("widgetId") int widgetId)
 	{

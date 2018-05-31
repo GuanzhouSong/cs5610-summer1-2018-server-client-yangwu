@@ -16,15 +16,18 @@ public class Widget {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
-	private String title;
+
+	private String name;
 	private int size;
 	private int parentId;
 	private String text;
 	private String widgetType;
+	private String listType;
 
 	@ManyToOne
 	@JsonIgnore
 	private Lesson lesson;
+	
 	public int getId() {
 		return id;
 	}
@@ -40,19 +43,6 @@ public class Widget {
 		this.size = size;
 	}
 	
-	public String getTitle() {
-		return title;
-	}
-	public void setTitle(String title) {
-		this.title = title;
-	}
-	public Lesson getLesson() {
-		return lesson;
-	}
-	public void setLesson(Lesson lesson) {
-		this.lesson = lesson;
-	}
-	
 	public void setParentId(int lessonId) {
 		this.parentId = lessonId;
 	}
@@ -61,6 +51,20 @@ public class Widget {
 		return parentId;
 	}
 	
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	public Lesson getLesson() {
+		return lesson;
+	}
+	public void setLesson(Lesson lesson) {
+		this.lesson = lesson;
+	}
+
 	public String getText() {
 		return text;
 	}
@@ -73,6 +77,13 @@ public class Widget {
 	}
 	public void setWidgetType(String widgetType) {
 		this.widgetType = widgetType;
+	}
+	
+	public String getListType() {
+		return listType;
+	}
+	public void setListType(String listType) {
+		this.listType = listType;
 	}
 	
 	
