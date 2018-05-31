@@ -70,6 +70,7 @@ public class WidgetService {
 	
 	@PostMapping("/api/widget/save")
 	public void saveAllWidgets(@RequestBody List<Widget> widgets) {
+		System.out.println("save");
 		widgetRepository.deleteAll();
 
 			for (Widget widget : widgets) {
@@ -100,7 +101,7 @@ public class WidgetService {
 	
 //	
 	@DeleteMapping("/api/widget/{widgetId}")
-	public void deleteWidgetn(@PathVariable("widgetId") int widgetId)
+	public void deleteWidget(@PathVariable("widgetId") int widgetId)
 	{
 		widgetRepository.deleteById(widgetId);
 	}
