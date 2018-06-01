@@ -2,6 +2,7 @@
 
 package com.example.myapp.services;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -52,17 +53,34 @@ public class WidgetService {
 	
 
 	
-	@PostMapping("/api/widget/save")
-	public void saveAllWidgets(@RequestBody List<Widget> widgets) {
-		System.out.println("save");
-		widgetRepository.deleteAll();
-
-			for (Widget widget : widgets) {
-				widgetRepository.save(widget);
+//	@PostMapping("/api/widget/save")
+//	public void saveAllWidgets(@RequestBody List<Widget> widgets) {
+//		System.out.println("save");
+//		widgetRepository.deleteAll();
+//
+//			for (Widget widget : widgets) {
+//				widgetRepository.save(widget);
+//			}
+//		}
+//	
+	@PostMapping("/api/lesson/{lessonId}/widget/save")
+	public void saveWidgetsForLesson(@PathVariable("lessonId") int lessonId, @RequestBody List<Widget> widgets) {
+		
+//		widgetRepository.deleteAll();
+			System.out.println("working here");
+			Optional<Lesson> data = lessonRepository.findById(lessonId);
+			
+			if (data.isPresent()) {
+				Lesson lesson = data.get();
+				List<Widget> tmp = lesson.getWidgets();
+				widgetRepository.deleteAll(tmp);
+				
+				for (Widget widget : widgets) {
+					widget.setLesson(lesson);
+				}
+				widgetRepository.saveAll(widgets);
 			}
 		}
-	
-	
 
 	@DeleteMapping("/api/widget/{widgetId}")
 	public void deleteWidget(@PathVariable("widgetId") int widgetId)
@@ -79,10 +97,18 @@ public class WidgetService {
 	@GetMapping("/api/lesson/{lessonId}/widget")
 	public List<Widget> findAllWidgetsForLesson(
 			@PathVariable("lessonId") int lessonId) {
+		
 		Optional<Lesson> data = lessonRepository.findById(lessonId);
 		if(data.isPresent()) {
+			
+//			Lesson lesson = data.get();
+//			List<Widget> result = lesson.getWidgets();
+//			Collections.sort(result);
+//			return result;
+			
 			Lesson lesson = data.get();
-			return lesson.getWidgets();
+			List<Widget> result = lesson.getWidgets();
+			return result;
 		}
 		return null;		
 	}
