@@ -101,14 +101,14 @@ public class WidgetService {
 		Optional<Lesson> data = lessonRepository.findById(lessonId);
 		if(data.isPresent()) {
 			
-//			Lesson lesson = data.get();
-//			List<Widget> result = lesson.getWidgets();
-//			Collections.sort(result);
-//			return result;
-			
 			Lesson lesson = data.get();
 			List<Widget> result = lesson.getWidgets();
+			Collections.sort(result);
 			return result;
+			
+//			Lesson lesson = data.get();
+//			List<Widget> result = lesson.getWidgets();
+//			return result;
 		}
 		return null;		
 	}
