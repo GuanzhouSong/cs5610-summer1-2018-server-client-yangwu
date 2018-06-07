@@ -6,13 +6,15 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-public class Widget implements Comparable<Widget> {
-//public class Widget {
+@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
+public class Widget{
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
@@ -93,10 +95,10 @@ public class Widget implements Comparable<Widget> {
 	public void setWidgetOrder(int widgetOrder) {
 		this.widgetOrder = widgetOrder;
 	}
-	
-	@Override
-	public int compareTo(Widget other) {
-		return this.widgetOrder - other.widgetOrder;
-	}
+//	
+//	@Override
+//	public int compareTo(Widget other) {
+//		return this.widgetOrder - other.widgetOrder;
+//	}
 
 }

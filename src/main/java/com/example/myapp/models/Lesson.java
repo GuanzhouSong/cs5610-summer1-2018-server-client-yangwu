@@ -41,6 +41,7 @@ public class Lesson {
 	}
 
 	@OneToMany(mappedBy="lesson")
+	@JsonIgnore
 	private List<Widget> widgets;
 	
 	public List<Widget> getWidgets() {

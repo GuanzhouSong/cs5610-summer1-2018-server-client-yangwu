@@ -48,6 +48,7 @@ public class Module {
 	}
 	
 	@OneToMany(mappedBy="module")
+	@JsonIgnore
 	private List<Lesson> lessons;
 	
 	public List<Lesson> getLessons() {

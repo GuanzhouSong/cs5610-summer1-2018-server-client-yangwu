@@ -50,9 +50,7 @@ public class WidgetService {
 		}
 		return null;
 	}
-	
 
-	
 //	@PostMapping("/api/widget/save")
 //	public void saveAllWidgets(@RequestBody List<Widget> widgets) {
 //		System.out.println("save");
@@ -100,17 +98,20 @@ public class WidgetService {
 		
 		Optional<Lesson> data = lessonRepository.findById(lessonId);
 		if(data.isPresent()) {
-			
 			Lesson lesson = data.get();
 			List<Widget> result = lesson.getWidgets();
-			Collections.sort(result);
 			return result;
-			
-//			Lesson lesson = data.get();
-//			List<Widget> result = lesson.getWidgets();
-//			return result;
 		}
 		return null;		
+	}
+	
+	@PostMapping("/api/widget/save")
+	public void saveAllWidgets(@RequestBody
+			List<Widget> widgets) {
+		widgetRepository.deleteAll();
+		for(Widget widget: widgets) {
+			widgetRepository.save(widget);
+		}
 	}
 	
 	
